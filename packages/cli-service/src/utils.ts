@@ -34,11 +34,16 @@ export function parseArgv(argv: string[]){
 
 //多文件打包入口检索
 export const parseDir = (entryPath: string, source: string[]) => {
+  //拿到 入口文件绝对路径
   entryPath = resolve(entryPath)
+  //根据入口文件 和 sources生成绝对路径 fg.sync同步读取遍历
   const filepaths = fg.sync(source.map((item) => resolve(entryPath, item)))
+
   const entry = filepaths.reduce<Record<string, { import: string; runtime: string }>>(
     (res, filepath) => {
+      // 根据文件路径 和 entryPath 拿到相对路径
       const relPath = path.relative(entryPath, filepath)
+      // 根据相对路径 拿到dir目录 和文件名
       const { dir, name } = path.parse(relPath)
       res[path.join(dir, name)] = {
         import: filepath,
@@ -93,6 +98,7 @@ export function getConfig(options: {
   const { entryPath, source, webpack } = config
 
   // entryPath默认src  source入口文件
+  // 如果用户没给 就走自己的生成entry 多入口
   if (!webpack.entry) {
     //目的是生成对应的小程序文件 所以需要根据source检索出全部入口文件地址
     const { entry } = parseDir(entryPath, source)

@@ -9,3 +9,4 @@ const options = parseArgv(argv)
 
 // 根据cli参数生成webpack配置项
 const config = getConfig(options)
+console.log('config =>' , config );

@@ -10,5 +10,5 @@
 
 
 ## 搭建cli
-- package下的bin选项会添加到node_module的.bin目录 npm run 调用脚本时会去.bin下去找
+- package下的bin选项会添加到node_module的.bin目录 npm run 调用脚本时会去.bin下去找(不是环境变量)
 
