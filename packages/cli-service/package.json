@@ -13,6 +13,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "webpack": "^5.96.1"
+    "fast-glob": "^3.3.2",
+    "webpack": "^5.96.1",
+    "webpack-merge": "^6.0.1"
   }
 }
