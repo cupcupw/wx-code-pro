@@ -45,6 +45,10 @@ export const parseDir = (entryPath: string, source: string[]) => {
       const relPath = path.relative(entryPath, filepath)
       // 根据相对路径 拿到dir目录 和文件名
       const { dir, name } = path.parse(relPath)
+      //   'pages/index/index': {
+      //   import: '/Users/wanghaibo/Desktop/个人/code_repository/wx-code-pro/playground/src/pages/index/index.js',
+      //   runtime: 'bundle'
+      // },
       res[path.join(dir, name)] = {
         import: filepath,
         runtime: 'bundle',
