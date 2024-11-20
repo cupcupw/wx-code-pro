@@ -1,0 +1,36 @@
+{
+  //https://www.typescriptlang.org/tsconfig/#Language_and_Environment_6254
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "ESNext",/* 用于指定编译之后的版本目标: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', 'ES2021', or 'ESNEXT'. */
+    "lib": ["ESNext"],/* 用于指定要包含在编译中的库文件，如果使用了ES6的新语法，就需要在这里引入对应的ES6库文件. */
+
+    /* Modules */
+    "module": "ESNext",/* 用来指定要使用的模块标准: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */
+    "moduleResolution": "node",
+     /* 选择模块解析策略: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
+
+    /* JavaScript Support */
+    "allowJs": true, /* 设置的值为true或者false，指定是否允许编译JS文件，默认是false，即不编译JS文件. */
+
+    /* Emit */
+    "declaration": true,/* 用来指定是否在编译的时候生成对应的声明文件 '.d.ts' . */
+    "outDir": "dist",
+
+    /* Interop Constraints */
+    "esModuleInterop": true, /* 通过为导入内容创建命名空间，实现CommonJS和ES模块之间的互操作性. */
+
+    /* Type Checking */
+    "strict": true, /* 用于指定是否启动所有类型检查. */
+
+    /* Completeness */
+    "skipLibCheck": true, /* 跳过声明文件的类型检查. */
+
+    // <https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#verbatimmodulesyntax>
+    "verbatimModuleSyntax": true
+    //export { Car } from "./car";
+    //应该保留或删除。如果Car用 之类的东西声明class，那么它可以保留在生成的 JavaScript 文件中。但如果Car仅将其声明为type别名或interface，那么 JavaScript 文件Car根本不应该导出。
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}

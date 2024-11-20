@@ -1,0 +1,18 @@
+{
+  "name": "@wx-code-pro/cli-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p ./tsconfig.lib.json"
+  },
+  "bin": {
+    "wxcodepro-cli": "./bin/wx-code-pro-cli.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "webpack": "^5.96.1"
+  }
+}

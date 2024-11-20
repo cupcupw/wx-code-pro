@@ -1,10 +1,7 @@
 # wx-code-pro
 
-## 搭建
-
-```sh
-
-```
+## 搭建cli
+- package下的bin选项会添加到node_module的.bin目录 npm run 调用脚本时会去.bin下去找
 
 ## 初步版本目标
 
