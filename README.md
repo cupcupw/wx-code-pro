@@ -68,3 +68,4 @@ js 代码解读复制代码{
 
 ## husky
 - prepare命令会在执行npm install（不带参数的情况下）之后自动执行。也就是说当我们执行npm install安装完项目依赖后会执行husky install命令，该命令会创建.husky/并指定该目录为git hooks所在的目录。这里我们先手动执行一次npm run prepare,会创建.husky目录。
+- 提交前钩子验证待完成
