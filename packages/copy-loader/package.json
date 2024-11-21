@@ -1,0 +1,15 @@
+{
+  "name": "@wx-code-pro/copy-loader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p ./tsconfig.lib.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "webpack": "^5.96.1"
+  }
+}

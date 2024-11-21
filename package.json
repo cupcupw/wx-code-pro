@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "pnpm -C ./playground dev",
-    "build:cli-service": "pnpm -C ./packages/cli-service build"
+    "build:cli-service": "pnpm -C ./packages/cli-service build",
+    "build:copy-loader": "pnpm -C ./packages/copy-loader build"
   },
   "author": "WHB",
   "license": "ISC",

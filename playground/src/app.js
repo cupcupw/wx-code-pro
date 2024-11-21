@@ -1,3 +1,7 @@
+import './app.json'
+// import './app.wxss'
+import './project.private.config.json'
+import './project.config.json'
 // app.js
 App({
   onLaunch() {

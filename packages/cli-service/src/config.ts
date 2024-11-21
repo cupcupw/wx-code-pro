@@ -111,24 +111,24 @@ export function getDefaultConfig(
               //   test: /\.s(a|c)ss$/,
               //   use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
               // },
-              {
-                test: /\.(wxml|html)$/,
-                loader: '@codelet/wxml-loader',
-                options: {
-                  entryPath,
-                },
-              },
-              {
-                test: /\.wxs$/,
-                loader: '@codelet/copy-loader',
-                options: {
-                  entryPath,
-                },
-              },
+              // {
+              //   test: /\.(wxml|html)$/,
+              //   loader: '@codelet/wxml-loader',
+              //   options: {
+              //     entryPath,
+              //   },
+              // },
+              // {
+              //   test: /\.wxs$/,
+              //   loader: '@codelet/copy-loader',
+              //   options: {
+              //     entryPath,
+              //   },
+              // },
               {
                 test: /\.json$/,
                 type: 'javascript/auto',
-                loader: '@codelet/copy-loader',
+                loader: '@wx-code-pro/copy-loader',
                 options: {
                   entryPath,
                 },
@@ -140,14 +140,14 @@ export function getDefaultConfig(
                   filename: 'assets/images/[name][ext]',
                 },
               },
-              {
-                test: /\.(ts|js)$/,
-                loader: 'babel-loader',
-                options: {
-                  cacheDirectory: true, // 开启 babel 缓存
-                  cacheCompression: false, // 关闭缓存文件压缩
-                },
-              },
+              // {
+              //   test: /\.(ts|js)$/,
+              //   loader: 'babel-loader',
+              //   options: {
+              //     cacheDirectory: true, // 开启 babel 缓存
+              //     cacheCompression: false, // 关闭缓存文件压缩
+              //   },
+              // },
             ],
           },
         ],
