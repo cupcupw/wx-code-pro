@@ -9,6 +9,7 @@
     "module": "ESNext",/* 用来指定要使用的模块标准: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */
     "moduleResolution": "node",
      /* 选择模块解析策略: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
+    "resolveJsonModule": true /* Enable importing .json files. */,
 
     /* JavaScript Support */
     "allowJs": true, /* 设置的值为true或者false，指定是否允许编译JS文件，默认是false，即不编译JS文件. */

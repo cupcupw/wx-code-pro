@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "properties": {
+    "entryPath": {
+      "description": "入口文件路径",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

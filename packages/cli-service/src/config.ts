@@ -118,15 +118,17 @@ export function getDefaultConfig(
               //     entryPath,
               //   },
               // },
-              // {
-              //   test: /\.wxs$/,
-              //   loader: '@codelet/copy-loader',
-              //   options: {
-              //     entryPath,
-              //   },
-              // },
+              {
+                test: /\.wxs$/,
+                loader: '@codelet/copy-loader',
+                options: {
+                  entryPath,
+                },
+              },
+              //json拷贝
               {
                 test: /\.json$/,
+                //type 设置为 javascript/auto 以绕过 webpack 内置的 json 导入
                 type: 'javascript/auto',
                 loader: '@wx-code-pro/copy-loader',
                 options: {
@@ -135,11 +137,14 @@ export function getDefaultConfig(
               },
               {
                 test: /\.(png|jpe?g|gif|svg)$/,
+                //发送一个单独的文件并导出 URL。之前通过使用 file-loader 实现。
                 type: 'asset/resource',
                 generator: {
                   filename: 'assets/images/[name][ext]',
                 },
               },
+              // https://babeljs.io/docs/options
+              // 语法转换 和 垫片（Polyfill）详见文档
               // {
               //   test: /\.(ts|js)$/,
               //   loader: 'babel-loader',
