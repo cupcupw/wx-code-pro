@@ -145,14 +145,16 @@ export function getDefaultConfig(
               },
               // https://babeljs.io/docs/options
               // 语法转换 和 垫片（Polyfill）详见文档
-              // {
-              //   test: /\.(ts|js)$/,
-              //   loader: 'babel-loader',
-              //   options: {
-              //     cacheDirectory: true, // 开启 babel 缓存
-              //     cacheCompression: false, // 关闭缓存文件压缩
-              //   },
-              // },
+              // 详见readme
+              // options https://webpack.docschina.org/loaders/babel-loader/ 或 babel文档
+              {
+                test: /\.(ts|js)$/,
+                loader: 'babel-loader',
+                options: {
+                  cacheDirectory: true, // 开启 babel 缓存
+                  cacheCompression: false, // 关闭缓存文件压缩
+                },
+              },
             ],
           },
         ],
