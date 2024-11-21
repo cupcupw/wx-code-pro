@@ -58,7 +58,7 @@ js 代码解读复制代码{
 } 
 
 ## eslint和prettier
-- eslint 9 与编辑器兼容有些问题1
+- eslint 9 与编辑器兼容有些问题12
 -  pnpm i eslint prettier -D -w
 -  eslint-config-prettier，eslint-plugin-prettier 
 -  Linters 通常不仅包含代码质量规则，还包含样式规则。使用 Prettier 时，大多数样式规则都是不必要的，但更糟糕的是，它们可能与 Prettier 冲突！使用 Prettier 处理代码格式问题，使用 Linters 处理代码质量问题
