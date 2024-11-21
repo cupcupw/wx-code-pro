@@ -56,3 +56,12 @@ js 代码解读复制代码{
   // 提取辅助函数
   "plugins": ["@babel/plugin-transform-runtime"]
 } 
+
+## eslint和prettier
+-  pnpm i eslint prettier -D -w
+-  eslint-config-prettier，eslint-plugin-prettier 
+-  Linters 通常不仅包含代码质量规则，还包含样式规则。使用 Prettier 时，大多数样式规则都是不必要的，但更糟糕的是，它们可能与 Prettier 冲突！使用 Prettier 处理代码格式问题，使用 Linters 处理代码质量问题
+-  参考https://github.com/prettier/eslint-plugin-prettier
+-  npm i @typescript-eslint/eslint-plugin 指定了 ts 代码规范的 plugin
+-  npm i @typescript-eslint/parser   // 解析器，使 eslint 可以解析 ts 语法
+
