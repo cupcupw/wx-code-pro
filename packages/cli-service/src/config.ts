@@ -1,4 +1,6 @@
 import type { Configuration } from 'webpack'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+
 import { resolve } from './utils'
 export interface Config {
   /** 开发路径默认 src */
@@ -28,34 +30,35 @@ export function getDefaultConfig(
   const mode = isDev ? 'development' : 'production'
 
   // 插件
-  // const plugins = [
-  //   new MiniCssExtractPlugin({
-  //     filename: '[name].wxss',
-  //   }),
-  //   new InjectChunkWebpackPlugin(),
-  //   new AppJsonWebpackPlugin({
-  //     pageIndex,
-  //   }),
-  //   new WebpackBar(),
-  // ]
+  const plugins = [
+    //sass css 后缀名转成wxss
+    new MiniCssExtractPlugin({
+      filename: '[name].wxss',
+    }),
+    // new InjectChunkWebpackPlugin(),
+    // new AppJsonWebpackPlugin({
+    //   pageIndex,
+    // }),
+    // new WebpackBar(),
+  ]
   // if (isDev) {
   //   plugins.push(new HMRWebpackPlugin())
   // }
 
   // 优化
   const optimization: Configuration['optimization'] = {
-    splitChunks: {
-      chunks: 'all',
-      minChunks: 2,
-      minSize: 0,
-      cacheGroups: {
-        main: {
-          name: 'bundle',
-          minChunks: 2,
-          chunks: 'all',
-        },
-      },
-    },
+    // splitChunks: {
+    //   chunks: 'all',
+    //   minChunks: 2,
+    //   minSize: 0,
+    //   cacheGroups: {
+    //     main: {
+    //       name: 'bundle',
+    //       minChunks: 2,
+    //       chunks: 'all',
+    //     },
+    //   },
+    // },
   }
   // 生产环境
   if (!isDev) {
@@ -103,14 +106,16 @@ export function getDefaultConfig(
         rules: [
           {
             oneOf: [
-              // {
-              //   test: /\.(css|wxss)$/,
-              //   use: [MiniCssExtractPlugin.loader, 'css-loader'],
-              // },
-              // {
-              //   test: /\.s(a|c)ss$/,
-              //   use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
-              // },
+              //如果由于某种原因你需要将 CSS 提取为一个文件（即不要将 CSS 存储在 JS 模块中）
+              //https://github.com/webpack-contrib/css-loader#recommend
+              {
+                test: /\.(css|wxss)$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+              },
+              {
+                test: /\.s(a|c)ss$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+              },
               // {
               //   test: /\.(wxml|html)$/,
               //   loader: '@codelet/wxml-loader',
@@ -160,7 +165,7 @@ export function getDefaultConfig(
         ],
       },
 
-      // plugins,
+      plugins,
 
       optimization,
     },

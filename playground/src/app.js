@@ -1,5 +1,5 @@
 import './app.json'
-// import './app.wxss'
+import './app.scss'
 import './project.private.config.json'
 import './project.config.json'
 // app.js
