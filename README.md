@@ -58,6 +58,7 @@ js 代码解读复制代码{
 } 
 
 ## eslint和prettier
+- eslint 9 与编辑器兼容有些问题
 -  pnpm i eslint prettier -D -w
 -  eslint-config-prettier，eslint-plugin-prettier 
 -  Linters 通常不仅包含代码质量规则，还包含样式规则。使用 Prettier 时，大多数样式规则都是不必要的，但更糟糕的是，它们可能与 Prettier 冲突！使用 Prettier 处理代码格式问题，使用 Linters 处理代码质量问题
@@ -65,3 +66,5 @@ js 代码解读复制代码{
 -  npm i @typescript-eslint/eslint-plugin 指定了 ts 代码规范的 plugin
 -  npm i @typescript-eslint/parser   // 解析器，使 eslint 可以解析 ts 语法
 
+## husky
+- prepare命令会在执行npm install（不带参数的情况下）之后自动执行。也就是说当我们执行npm install安装完项目依赖后会执行husky install命令，该命令会创建.husky/并指定该目录为git hooks所在的目录。这里我们先手动执行一次npm run prepare,会创建.husky目录。
