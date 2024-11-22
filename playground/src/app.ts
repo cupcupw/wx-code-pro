@@ -2,22 +2,37 @@ import './app.json'
 import './app.scss'
 import './project.private.config.json'
 import './project.config.json'
+// app.js
+App({
+  onLaunch() {
+    // 展示本地存储能力
+    const logs = wx.getStorageSync('logs') || []
+    logs.unshift(Date.now())
+    wx.setStorageSync('logs', logs)
 
-// import col, { createApp } from '@codelet/core'
+    const nobj: { age?: string; name: string } = {
+      name: 'whb',
+    }
+    const a = nobj?.age
+    const b = nobj.age ?? 'bhw'
+    console.log('a,b =>', a, b)
+    const list = [1, 2, 3, 4, 5]
+    const c = list.find((i) => i === 1)
 
-// import { handleError } from './utils'
-// ;((s) => s.keys().forEach((k: any) => s(k).default && col.use(s(k).default)))(
-//   (require as unknown as NodeRequire).context('./plugins', true, /\.ts$/),
-// )
-
-// createApp({
-//   onError: handleError,
-//   onUnhandledRejection: handleError,
-//   onPageNotFound() {
-//     col.switchTab('/pages/home/index')
-//     new Promise((res, rej)=> {
-//       console.log('res =>', res)
-//     })
-//   },
-// })
-const a = 1
+    class Circle {}
+    const cir = new Circle()
+    console.log('cir =>', cir)
+    new Promise((res, rej) => {
+      console.log('res =>', res)
+    })
+    // 登录
+    wx.login({
+      success: (res) => {
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+      },
+    })
+  },
+  globalData: {
+    userInfo: null,
+  },
+})

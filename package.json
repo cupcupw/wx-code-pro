@@ -6,12 +6,14 @@
   "scripts": {
     "lint-staged": "lint-staged",
     "prepare": "husky install",
+
     "clean": "rimraf --glob **/node_modules",
     "dev": "pnpm -C ./playground dev",
+
+    "build:packages": "pnpm build:cli-service && pnpm build:copy-loader && pnpm build:inject-chunk",
     "build:cli-service": "pnpm -C ./packages/cli-service build",
     "build:copy-loader": "pnpm -C ./packages/copy-loader build",
     "build:inject-chunk": "pnpm -C ./packages/inject-chunk-webpack-plugin build"
-
   },
   "author": "WHB",
   "license": "ISC",

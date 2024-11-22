@@ -1,13 +1,14 @@
-import type { LoaderContext } from "webpack";
 import path from 'path'
-import type { CopyLoaderOptions } from "./types";
-import schema from './schema.json'
+import type { LoaderContext } from 'webpack'
 
-export default function loader(this: LoaderContext<CopyLoaderOptions>, content: string){
+import schema from './schema.json'
+import type { CopyLoaderOptions } from './types'
+
+export default function loader(this: LoaderContext<CopyLoaderOptions>, content: string) {
   //获取loader配置项
   const { entryPath = 'src' } = this.getOptions(schema as any)
 
-  // this.rootContext 脚本运行目录 
+  // this.rootContext 脚本运行目录
   //入口路径
   //resourcePath 文件路径
   //获取 相对于入口路径的 相对路径

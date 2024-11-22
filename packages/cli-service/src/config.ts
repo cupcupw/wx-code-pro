@@ -1,3 +1,4 @@
+import InjectChunkWebpackPlugin from '@wx-code-pro/inject-chunk-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import type { Configuration } from 'webpack'
 
@@ -35,7 +36,7 @@ export function getDefaultConfig(
     new MiniCssExtractPlugin({
       filename: '[name].wxss',
     }),
-    // new InjectChunkWebpackPlugin(),
+    new InjectChunkWebpackPlugin(),
     // new AppJsonWebpackPlugin({
     //   pageIndex,
     // }),

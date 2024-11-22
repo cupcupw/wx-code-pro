@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "ESNext",
+    "lib": ["ESNext"],
+
+    /* Modules */
+    "module": "ESNext",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "types": ["miniprogram-api-typings"],
+
+    /* JavaScript Support */
+    // "allowJs": true,
+
+    /* Emit */
+    "declaration": true,
+    "outDir": "dist",
+
+    /* Interop Constraints */
+    "esModuleInterop": true,
+
+    /* Type Checking */
+    "strict": true,
+
+    /* Completeness */
+    "skipLibCheck": true,
+
+    // <https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#verbatimmodulesyntax>
+    "verbatimModuleSyntax": true
+  },
+  "include": ["src/**/*.ts", "typings/**/*.ts"],
+  "exclude": ["node_modules"]
+}
