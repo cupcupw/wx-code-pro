@@ -8,6 +8,36 @@
 - 支持分包策略
 - 支持事件传递参数
 
+## webpack loader plugin
+- https://juejin.cn/post/6976052326947618853?searchId=20241121100530667A3CC83272CDCBC3FC#heading-13
+
+## webpack 插件
+- 要熟悉插件必须先了解webpack hook规则
+- compiler里的hook对象是通过tapable包创建的
+- tapable出了很多hook对象
+- SyncHook,
+  SyncBailHook,
+  SyncWaterfallHook,
+  SyncLoopHook,
+  AsyncParallelHook,
+  AsyncParallelBailHook, 
+  AsyncSeriesHook,
+  AsyncSeriesBailHook,
+  AsyncSeriesWaterfallHook
+- 基本hook: AsyncParallelHook AsyncSeriesHook 这个钩子只是简单地调用它连续点击的每个函数
+- Waterfall hook: 会连续调用每个点击的函数。与基本挂钩不同，它将每个函数的返回值传递给下一个函数
+- bail hook: 允许提前退出。当任何一个点击的函数返回任何内容时，bail hook 将停止执行其余的函数
+- loop hook: 插件返回非未定义值时，钩子将从第一个插件重新启动。它将循环直到所有插件返回未定义。
+- Sync 同步挂钩只能使用同步函数（使用myHook.tap() ）进行点击
+- AsyncSeries 异步系列钩子可以使用同步、基于回调和基于 Promise 的函数（使用myHook.tap() 、 myHook.tapAsync()和myHook.tapPromise() ）进行点击。他们连续调用每个异步方法。
+- AsyncParallel 异步并行。异步并行钩子还可以通过同步、基于回调和基于 Promise 的函数进行点击（使用myHook.tap() 、 myHook.tapAsync()和myHook.tapPromise() ）。但是，它们并行运行每个异步方法。
+- Interception 所有 Hook 都提供额外的拦截 API：
+- call : (...args) => void添加对拦截器的call将在触发钩子时触发。您可以访问 hooks 参数。
+- tap : (tap: Tap) => void将tap添加到拦截器将在插件点击钩子时触发。提供的是Tap对象。 Tap对象无法更改。
+- Loop : (...args) => void将loop添加到拦截器将触发循环钩子的每个循环。
+- register : (tap: Tap) => Tap | undefined将register添加到拦截器将为每个添加的Tap触发并允许对其进行修改。
+- Context: 插件和拦截器可以选择访问可选的context对象，该对象可用于将任意值传递给后续插件和拦截器。
+- 具体参考 ：https://github.com/webpack/tapable#tapable
 
 ## 搭建cli
 - package下的bin选项会添加到node_module的.bin目录 npm run 调用脚本时会去.bin下去找(不是环境变量)

@@ -1,5 +1,5 @@
-import type { Configuration } from 'webpack'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import type { Configuration } from 'webpack'
 
 import { resolve } from './utils'
 export interface Config {
