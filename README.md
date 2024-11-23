@@ -41,6 +41,8 @@
 
 ## webpack概念
 - ‌webpack中的chunk和bundle是构建过程中的两个重要概念，它们在构建过程中扮演着不同的角色。‌
+- webpack 会构建 文件依赖 一个文件关联的文件成为chunk 多个入口文件都依赖的一个chunk就需要用到代码分割
+- bundle 就是根据规则征程的代码块 比如把多个chunk打包成一个bundle
 
 定义和作用
 ‌Chunk‌：在webpack中，chunk是指一个代码块，它由多个模块组合而成。当webpack执行构建时，会根据入口文件和依赖关系生成多个chunk。这些chunk包含了模块的代码，但还没有经过最终的打包处理‌12。

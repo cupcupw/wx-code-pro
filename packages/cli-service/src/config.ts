@@ -1,6 +1,9 @@
 import InjectChunkWebpackPlugin from '@wx-code-pro/inject-chunk-webpack-plugin'
+import AppJsonWebpackPlugin from '@wx-code-pro/app-json-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import type { Configuration } from 'webpack'
+import TerserWebpackPlugin from 'terser-webpack-plugin';
+import WebpackBar from 'webpackbar'
 
 import { resolve } from './utils'
 export interface Config {
@@ -37,10 +40,10 @@ export function getDefaultConfig(
       filename: '[name].wxss',
     }),
     new InjectChunkWebpackPlugin(),
-    // new AppJsonWebpackPlugin({
-    //   pageIndex,
-    // }),
-    // new WebpackBar(),
+    new AppJsonWebpackPlugin({
+      pageIndex,
+    }),
+    new WebpackBar(),
   ]
   // if (isDev) {
   //   plugins.push(new HMRWebpackPlugin())
@@ -48,33 +51,42 @@ export function getDefaultConfig(
 
   // 优化
   const optimization: Configuration['optimization'] = {
-    // splitChunks: {
-    //   chunks: 'all',
-    //   minChunks: 2,
-    //   minSize: 0,
-    //   cacheGroups: {
-    //     main: {
-    //       name: 'bundle',
-    //       minChunks: 2,
-    //       chunks: 'all',
-    //     },
-    //   },
-    // },
+    // chunks https://webpack.docschina.org/guides/code-splitting/#splitchunksplugin
+    // a引用c b引用c 默认会把c 打到 a, b里 chunks:all 会把c座位一个单独的bundle 分割
+    // 小程序 不会同时引入 a b web页面注意要加入 runtimeChunk: 'single', 否则 c只有一份 如果c有实例化的东西 a b操作的会为1份
+    // minchunks:简单来讲，假如 minChunks 设置为 n，那么某个 module 想要被拆分出去，那么它的共享次数（或者说并行请求次数必须 >= n）
+    // minSize与maxSize minSize限制拆分包的最小值(达到这个值，就拆出新包)
+    // maxSize限制每个拆分出来的包的最大文件体积(超过这个大小，再做包拆分
+
+    splitChunks: {
+      chunks: 'all',
+      minChunks: 2,
+      minSize: 0,
+      cacheGroups: {
+        main: {
+          name: 'bundle',
+          minChunks: 2,
+          chunks: 'all',
+        },
+      },
+    },
   }
   // 生产环境
   if (!isDev) {
-    optimization.minimize = true
-    // optimization.minimizer = [
-    //   new TerserWebpackPlugin({
-    //     // 不生成 license 文件
-    //     extractComments: false,
-    //     terserOptions: {
-    //       format: {
-    //         comments: false, // 删除注释
-    //       },
-    //     },
-    //   }),
-    // ]
+    //告知 webpack 使用 TerserPlugin 或其它在 optimization.minimizer定义的插件压缩 bundle。
+    //允许你通过提供一个或多个定制过的 TerserPlugin 实例，覆盖默认压缩工具(minimizer)。
+    optimization.minimize = true   //是否压缩
+    optimization.minimizer = [
+      new TerserWebpackPlugin({
+        // 不生成 license 文件
+        extractComments: false,
+        terserOptions: {
+          format: {
+            comments: false, // 删除注释
+          },
+        },
+      }),
+    ]
   }
 
   return {
