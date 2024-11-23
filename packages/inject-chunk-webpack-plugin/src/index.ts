@@ -22,47 +22,69 @@ export default class InjectChunkWebpackPlugin {
 
           const processedChunk = new Set()
 
+          function getTargetFile(file: string) {
+            const queryStringIdx = file.indexOf('?')
+            if (queryStringIdx >= 0) {
+              file = file.substr(0, queryStringIdx)
+            }
+            return file
+          }
+
+          function toPosix(path: string) {
+            return path.replace(/\\/g, '/')
+          }
+
+          // 获取关联的js文件
           function getChunkFile(chunk: Chunk) {
+            // [ 'bundle.js' ] 【 'app.wxss', 'app.js' 】
             console.log(' chunk.files=>', chunk.files)
             return Array.from(chunk.files).find((item) => ['.js'].includes(path.extname(item)))
           }
 
           function processChunk(chunk: Chunk, isRuntime: boolean, relativeChunks: Chunk[]) {
+            // 获取关联的js文件
+            // [ 'bundle.js' ] 【 'app.wxss', 'app.js' 】 取到js
+            // chunkFile=> bundle.js chunkFile=> app.js
             const chunkFile = getChunkFile(chunk)
             if (!chunkFile || processedChunk.has(chunk)) {
               return
             }
+            //获取CachedSource 文件内容
+            const originalSource = compilation.assets[chunkFile]
 
-            // const originalSource = compilation.assets[chunkFile]
+            //new sources.ConcatSource 是在 webpack 打包工具中使用的代码，用于连接和拼接多个源（例如：文件）以创建一个单一的源。
+            const source = new sources.ConcatSource()
+            source.add(`\nvar ${globalObject} = {};\n`)
 
-            // const source = new sources.ConcatSource()
-            // source.add(`\nvar ${globalObject} = {};\n`)
+            relativeChunks.forEach((relativeChunk, index) => {
+              // 获取路径 bundle.js
+              const relativeChunkFile = relativeChunk.files.values().next().value
+              console.log(' relativeChunkFile=>', relativeChunkFile)
+              if (!relativeChunkFile) return
+              // 获取关联文件的
+              const chunkPath = getTargetFile(chunkFile)
+              //获取关联文件的路径
+              let relativePath = getTargetFile(relativeChunkFile)
+              relativePath = path.relative(path.dirname(chunkPath), relativePath)
+              relativePath = toPosix(relativePath)
+              if (index === 0) {
+                source.add(
+                  `${globalObject}[${chunkLoadingGlobalStr}] = require("${relativePath}");\n`,
+                )
+              } else {
+                source.add(`require("${relativePath}");\n`)
+              }
+            })
 
-            // relativeChunks.forEach((relativeChunk, index) => {
-            //   const relativeChunkFile = relativeChunk.files.values().next().value
-            //   if (!relativeChunkFile) return
-            //   const chunkPath = getTargetFile(chunkFile)
-            //   let relativePath = getTargetFile(relativeChunkFile)
-            //   relativePath = path.relative(path.dirname(chunkPath), relativePath)
-            //   relativePath = toPosix(relativePath)
-            //   if (index === 0) {
-            //     source.add(
-            //       `${globalObject}[${chunkLoadingGlobalStr}] = require("${relativePath}");\n`,
-            //     )
-            //   } else {
-            //     source.add(`require("${relativePath}");\n`)
-            //   }
-            // })
+            if (isRuntime) {
+              source.add(originalSource)
+              source.add(`\nmodule.exports = ${globalObject}[${chunkLoadingGlobalStr}];\n`)
+            } else {
+              source.add(originalSource)
+            }
 
-            // if (isRuntime) {
-            //   source.add(originalSource)
-            //   source.add(`\nmodule.exports = ${globalObject}[${chunkLoadingGlobalStr}];\n`)
-            // } else {
-            //   source.add(originalSource)
-            // }
-
-            // compilation.assets[chunkFile] = source
-            // processedChunk.add(chunk)
+            compilation.assets[chunkFile] = source
+            processedChunk.add(chunk)
           }
 
           // chunkGroups是chunk集合

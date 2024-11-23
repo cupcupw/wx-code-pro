@@ -2,6 +2,9 @@ import './app.json'
 import './app.scss'
 import './project.private.config.json'
 import './project.config.json'
+
+import { test } from './test'
+test()
 // app.js
 App({
   onLaunch() {
