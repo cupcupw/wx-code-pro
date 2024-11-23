@@ -39,6 +39,13 @@
 - Context: 插件和拦截器可以选择访问可选的context对象，该对象可用于将任意值传递给后续插件和拦截器。
 - 具体参考 ：https://github.com/webpack/tapable#tapable
 
+## webpack概念
+- ‌webpack中的chunk和bundle是构建过程中的两个重要概念，它们在构建过程中扮演着不同的角色。‌
+
+定义和作用
+‌Chunk‌：在webpack中，chunk是指一个代码块，它由多个模块组合而成。当webpack执行构建时，会根据入口文件和依赖关系生成多个chunk。这些chunk包含了模块的代码，但还没有经过最终的打包处理‌12。
+‌Bundle‌：bundle是最终生成的文件，它包含了所有的chunk和模块。在webpack执行构建时，会把每个chunk打包成一个bundle文件。bundle文件经过了加载和编译，可以直接在浏览器中运行‌13。
+
 ## 搭建cli
 - package下的bin选项会添加到node_module的.bin目录 npm run 调用脚本时会去.bin下去找(不是环境变量)
 - @babel/core

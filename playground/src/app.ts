@@ -10,11 +10,13 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 
-    const nobj: { age?: string; name: string } = {
+    const nobj = {
       name: 'whb',
     }
+    nobj.age = '27'
     const a = nobj?.age
     const b = nobj.age ?? 'bhw'
+
     console.log('a,b =>', a, b)
     const list = [1, 2, 3, 4, 5]
     const c = list.find((i) => i === 1)

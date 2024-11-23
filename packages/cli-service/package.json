@@ -4,7 +4,8 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc -p ./tsconfig.lib.json"
+    "build": "npm run clean && tsc -p ./tsconfig.lib.json",
+    "clean": "rimraf ./dist"
   },
   "bin": {
     "wxcodepro-cli": "./bin/wx-code-pro-cli.js"
@@ -25,5 +26,8 @@
     "sass-loader": "^16.0.3",
     "webpack": "^5.96.1",
     "webpack-merge": "^6.0.1"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1"
   }
 }

@@ -1,15 +1,16 @@
-import path from 'path';
-import fs from 'fs'
 //https://github.com/mrmlnc/fast-glob
 // 支持glob表达式 遍历文件系统
 import fg from 'fast-glob'
+import fs from 'fs'
+import path from 'path'
 import type { Configuration } from 'webpack'
-import { getDefaultConfig, type Config } from './config';
-import merge from 'webpack-merge';
+import merge from 'webpack-merge'
+
+import { type Config, getDefaultConfig } from './config'
 
 //找到命令行 是否含有这项
-export function getOptionValue(argv: string[], options: string){
-  return argv.find( i => i === options)
+export function getOptionValue(argv: string[], options: string) {
+  return argv.find((i) => i === options)
 }
 
 //脚本运行目录
@@ -18,7 +19,7 @@ export const cmd = process.cwd()
 export const resolve = (...args: string[]) => path.resolve(cmd, ...args)
 
 //解析cli参数
-export function parseArgv(argv: string[]){
+export function parseArgv(argv: string[]) {
   const isWatch = argv.includes('--watch')
   const isDev = argv.includes('dev')
   const pageIndex = getOptionValue(argv, '--pageIndex') || ''
@@ -28,7 +29,7 @@ export function parseArgv(argv: string[]){
     configPath, //配置文件的相对路径
     isWatch, //是否监听
     pageIndex, //小程序首页
-    isDev
+    isDev,
   }
 }
 
@@ -70,15 +71,14 @@ export function getConfig(options: {
   const { configPath, isWatch } = options
   let config: Required<Config>
   //同步地检查 配置文件 或目录是否存在
-  if (fs.existsSync(configPath)){
-    
+  if (fs.existsSync(configPath)) {
     const cfg = require(configPath)
 
     //如果是配置文件为函数 先拿到默认值 调用项目函数把默认项传入 要求返回Configuration
     if (typeof cfg === 'function') {
       config = getDefaultConfig(options)
       config = cfg(config)
-    }else {
+    } else {
       // 配置文件和命令行有pageIndex isDev 有先走命令行
       if (options.pageIndex) {
         cfg.pageIndex = options.pageIndex
@@ -114,5 +114,4 @@ export function getConfig(options: {
   }
 
   return webpack
-
 }
